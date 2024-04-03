@@ -3,11 +3,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import Box from "@mui/material/Box";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 
-function ModeSelect() {
+export default function ModeSelect() {
   const { mode, setMode } = useColorScheme();
   const handleChange = (e) => {
     const selectMode = e.target.value;
@@ -24,17 +25,21 @@ function ModeSelect() {
         onChange={handleChange}
       >
         <MenuItem value="light">
-          <LightModeIcon /> Light
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <LightModeIcon /> Light
+          </Box>
         </MenuItem>
         <MenuItem value="dark">
-          <DarkModeOutlinedIcon /> Dark
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <DarkModeOutlinedIcon /> Dark
+          </Box>
         </MenuItem>
         <MenuItem value="system">
-          <SettingsBrightnessIcon /> Sytem
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <SettingsBrightnessIcon /> Sytem
+          </Box>
         </MenuItem>
       </Select>
     </FormControl>
   );
 }
-
-export default ModeSelect;

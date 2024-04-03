@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-function BoardBar() {
+export default function BoardBar() {
   return (
     <Box
       sx={{
@@ -14,4 +14,3 @@ function BoardBar() {
     </Box>
   );
 }
-export default BoardBar;

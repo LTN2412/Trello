@@ -1,10 +1,8 @@
 import Board from "./pages/Boards";
-function App() {
+export default function App() {
   return (
     <>
       <Board />
     </>
   );
 }
-
-export default App;
