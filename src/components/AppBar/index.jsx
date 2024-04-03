@@ -17,7 +17,6 @@ export default function AppBar() {
   return (
     <Box
       sx={{
-        backgroundColor: "primary.light",
         width: "100%",
         height: (theme) => theme.trelloCustom.appBarHeight,
         display: "flex",
@@ -26,7 +25,7 @@ export default function AppBar() {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <AppsIcon sx={{ color: "primary.main" }} />
+        <AppsIcon fontSize="large" sx={{ color: "primary.main" }} />
         <Trello />
         <WorkSpace />
         <Recent />
@@ -34,12 +33,12 @@ export default function AppBar() {
         <Templates />
         <Button variant="outlined">Create</Button>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
-        <TextField placeholder="Seacrch..." size="small" />
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <TextField label="Seacrch..." size="small" />
         <ModeSelect />
         <Notifications />
         <Tooltip title="Help" sx={{ cursor: "pointer" }}>
-          <HelpIcon />
+          <HelpIcon sx={{ color: "primary.main" }} />
         </Tooltip>
         <Profile />
       </Box>

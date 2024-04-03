@@ -8,9 +8,13 @@ export default function Trello() {
       <SvgIcon
         component={TrelloIcon}
         inheritViewBox
+        fontSize="large"
         sx={{ color: "primary.main" }}
       />
-      <Typography variant="span" sx={{ color: "primary.main" }}>
+      <Typography
+        variant="span"
+        sx={{ color: "primary.main", fontSize: 20, fontWeight: "bolder" }}
+      >
         Trello
       </Typography>
     </Box>
