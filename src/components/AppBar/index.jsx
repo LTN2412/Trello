@@ -22,20 +22,31 @@ export default function AppBar() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        gap: 2,
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
         <AppsIcon fontSize="large" sx={{ color: "primary.main" }} />
         <Trello />
-        <WorkSpace />
-        <Recent />
-        <Starred />
-        <Templates />
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <WorkSpace />
+          <Recent />
+          <Starred />
+          <Templates />
+        </Box>
         <Button variant="outlined">Create</Button>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <TextField label="Seacrch..." size="small" />
-        <ModeSelect />
+        <Box
+          sx={{
+            display: { xs: "none", md: "flex" },
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <TextField label="Seacrch..." size="small" />
+          <ModeSelect />
+        </Box>
         <Notifications />
         <Tooltip title="Help" sx={{ cursor: "pointer" }}>
           <HelpIcon sx={{ color: "primary.main" }} />
