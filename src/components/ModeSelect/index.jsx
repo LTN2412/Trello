@@ -15,14 +15,36 @@ export default function ModeSelect() {
     setMode(selectMode);
   };
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small-label">Mode</InputLabel>
+    <FormControl
+      sx={{ m: 1, minWidth: "120px", borderColor: "white" }}
+      size="small"
+    >
+      <InputLabel
+        id="demo-select-small-label"
+        sx={{
+          color: "white",
+          "&:hover": { color: "white" },
+          "&.Mui-focused": { color: "white" },
+        }}
+      >
+        Mode
+      </InputLabel>
       <Select
         labelId="demo-select-small-label"
         id="demo-select-small"
         value={mode}
         label="Mode"
         onChange={handleChange}
+        sx={{
+          color: "white",
+          ".MuiOutlinedInput-notchedOutline": { borderColor: "white" },
+          "&:hover ": {
+            ".MuiOutlinedInput-notchedOutline": { borderColor: "white" },
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "white",
+          },
+        }}
       >
         <MenuItem value="light">
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>

@@ -24,6 +24,7 @@ export default function Starred() {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={<ExpandMoreIcon />}
+        sx={{ color: "text.primary" }}
       >
         Starred
       </Button>

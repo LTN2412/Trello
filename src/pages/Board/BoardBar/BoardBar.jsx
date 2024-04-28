@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
+import Typography from "@mui/material/Typography";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import VpnLockIcon from "@mui/icons-material/VpnLock";
 import AddToDriveIcon from "@mui/icons-material/AddToDrive";
@@ -10,16 +10,29 @@ import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Tooltip from "@mui/material/Tooltip";
 
-export default function BoardBar() {
-  const handleClick = () => {
-    //
+export default function BoardBar({ board }) {
+  const handleClick = () => {};
+  const chipCss = {
+    backgroundColor: "white",
+    borderRadius: 2,
+    padding: 0.5,
+    "& .MuiSvgIcon-root": {
+      color: "#3498db",
+    },
+    "&:hover ": {
+      backgroundColor: "#3498db",
+      "& .MuiSvgIcon-root": {
+        color: "white",
+      },
+    },
   };
   return (
-    <Container
+    <Box
       sx={{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        backgroundColor: "white",
       }}
     >
       <Box
@@ -31,62 +44,36 @@ export default function BoardBar() {
           gap: 2,
         }}
       >
-        <Chip
-          icon={<DashboardIcon />}
-          label="hello"
-          onClick={handleClick}
-          sx={{
-            backgroundColor: "white",
-            border: "none",
-            borderRadius: 2,
-            padding: 0.5,
-            "& .MuiSvgIcon-root": {
-              color: "primary.700",
-            },
-            "&:hover ": {
-              backgroundColor: "primary.300",
-            },
-          }}
-        />
+        <Tooltip title={board?.description}>
+          <Chip
+            icon={<DashboardIcon />}
+            label={board?.title}
+            onClick={handleClick}
+            sx={chipCss}
+          />
+        </Tooltip>
         <Chip
           icon={<VpnLockIcon />}
-          label="Xin chao"
+          label={board?.description}
           onClick={handleClick}
-          sx={{
-            backgroundColor: "white",
-            border: "none",
-            borderRadius: 2,
-            padding: 0.5,
-            "& .MuiSvgIcon-root": {
-              color: "primary.700",
-            },
-            "&:hover ": {
-              backgroundColor: "primary.300",
-            },
-          }}
+          sx={chipCss}
         />
         <Chip
           icon={<AddToDriveIcon />}
           label="hi"
           onClick={handleClick}
-          sx={{
-            backgroundColor: "white",
-            border: "none",
-            borderRadius: 2,
-            padding: 0.5,
-            "& .MuiSvgIcon-root": {
-              color: "primary.700",
-            },
-            "&:hover ": {
-              backgroundColor: "primary.300",
-            },
-          }}
+          sx={chipCss}
         />
       </Box>
-      <Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
-        <Button variant="outlined">
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Button
+          variant="outlined"
+          sx={{
+            gap: 1,
+          }}
+        >
           <PersonAddAltIcon />
-          Invite
+          <Typography>Invite</Typography>
         </Button>
         <AvatarGroup max={4} total={24}>
           <Tooltip title="LTN">
@@ -100,6 +87,6 @@ export default function BoardBar() {
           </Tooltip>
         </AvatarGroup>
       </Box>
-    </Container>
+    </Box>
   );
 }
