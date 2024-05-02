@@ -4,6 +4,7 @@ const APP_BAR_HEIGHT = "60px";
 const BOARD_BAR_HEIGHT = "80px";
 const BOARD_CONTENT_HEIGHT = `calc( 100vh - ${APP_BAR_HEIGHT} - ${BOARD_BAR_HEIGHT} )`;
 
+const CARD_WIDTH = "270px";
 const CARD_HEADER_HEIGHT = "60px";
 const CARD_FOOTER_HEIGHT = "60px";
 const CARD_CONTENT_HEIGHT = `calc( ${BOARD_CONTENT_HEIGHT} - ${CARD_HEADER_HEIGHT} - ${CARD_FOOTER_HEIGHT} )`;
@@ -14,6 +15,7 @@ const theme = extendTheme({
     boardBarHeight: BOARD_BAR_HEIGHT,
     boardContentHeight: BOARD_CONTENT_HEIGHT,
     card: {
+      cardWidth: CARD_WIDTH,
       cardHeaderHeight: CARD_HEADER_HEIGHT,
       cardFooterHeight: CARD_FOOTER_HEIGHT,
       cardContentHeight: CARD_CONTENT_HEIGHT,
@@ -29,7 +31,21 @@ const theme = extendTheme({
       },
     },
     dark: {
-      palette: {},
+      palette: {
+        primary: {
+          main: "#101204",
+        },
+        secondary: {
+          main: "#23272B",
+        },
+        text: {
+          main: "#9fadbc",
+          secondary: "white",
+        },
+        typography: {
+          fontSize: "140px",
+        },
+      },
     },
   },
   components: {

@@ -17,13 +17,13 @@ export default function CardTrello({ card }) {
     <Card
       sx={{
         overflow: "unset",
+        backgroundColor: "secondary.main",
+        borderRadius: "12px",
       }}
     >
-      {card?.cover && (
-        <CardMedia component="img" src={card.cover} alt="green iguana" />
-      )}
+      {card?.cover && <CardMedia component="img" src={card.cover} />}
       <CardContent>
-        <Typography>{card?.title}</Typography>
+        <Typography color={"text.main"}>{card?.title}</Typography>
       </CardContent>
       {shouldShowCardActions() && (
         <CardActions sx={{ pt: 0 }}>

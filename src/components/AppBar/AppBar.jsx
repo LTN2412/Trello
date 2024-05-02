@@ -1,19 +1,16 @@
 import Box from "@mui/material/Box";
-import ModeSelect from "../ModeSelect";
-import AppsIcon from "@mui/icons-material/Apps";
-import Trello from "../AppBar/Trello";
-import WorkSpace from "../AppBar/Menus/Workspaces";
-import Recent from "../AppBar/Menus/Recent";
-import Starred from "../AppBar/Menus/Starred";
-import Templates from "../AppBar/Menus/Templates";
 import Button from "@mui/material/Button";
-import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import TextField from "@mui/material/TextField";
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import Notifications from "../Notifications";
-import HelpIcon from "@mui/icons-material/Help";
-import Tooltip from "@mui/material/Tooltip";
+import ModeSelect from "./ModeSelect/ModeSelect";
+import Trello from "./Trello/Trello";
+import WorkSpace from "./Menus/Workspaces";
+import Recent from "./Menus/Recent";
+import Starred from "./Menus/Starred";
+import Templates from "./Menus/Templates";
+import Notifications from "./Notifications/Notification";
 import Profile from "./Menus/Profile";
 
 export default function AppBar() {
@@ -29,8 +26,7 @@ export default function AppBar() {
         backgroundColor: "primary.main",
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <AppsIcon fontSize="large" sx={{ color: "text.primary" }} />
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2, pl: 2 }}>
         <Trello />
         <Box sx={{ display: "flex" }}>
           <WorkSpace />
@@ -49,7 +45,7 @@ export default function AppBar() {
           Create
         </Button>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2, pr: 2 }}>
         <TextField
           label="Seacrch"
           size="small"
@@ -73,9 +69,6 @@ export default function AppBar() {
         />
         <ModeSelect />
         <Notifications />
-        <Tooltip title="Help" sx={{ cursor: "pointer" }}>
-          <HelpIcon sx={{ color: "primary.main" }} />
-        </Tooltip>
         <Profile />
       </Box>
     </Box>

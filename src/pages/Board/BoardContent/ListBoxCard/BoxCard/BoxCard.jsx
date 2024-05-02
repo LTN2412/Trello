@@ -1,31 +1,42 @@
 import Box from "@mui/material/Box";
+import { useSelector } from "react-redux";
+import { selectColumnById } from "@/features/board/boardSlice";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import BoxCardHeader from "./BoxCardHeader/BoxCardHeader";
 import BoxCardFooter from "./BoxCardFooter/BoxCardFooter";
 import BoxCardBody from "./BoxCardBody/BoxCardBody";
 
-export default function BoxCard({ column }) {
+export default function BoxCard({ columnId }) {
+  const column = useSelector((state) => selectColumnById(state, columnId));
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: columnId });
+  const dndKitColumnStyle = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  };
   return (
     <Box
+      ref={setNodeRef}
+      style={dndKitColumnStyle}
+      {...attributes}
+      {...listeners}
       sx={{
-        width: "300px",
+        minWidth: (theme) => theme.trelloCustom.card.cardWidth,
         height: "fit-content",
         maxHeight: (theme) =>
           `calc( ${theme.trelloCustom.boardContentHeight} - ${theme.spacing(
             5
           )} )`,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
         backgroundColor: "primary.dark",
-        borderRadius: "10px",
+        borderRadius: "12px",
         p: "0 10px",
         m: "0 10px",
       }}
     >
       <BoxCardHeader columnTitle={column?.title} />
       <BoxCardBody cards={column?.cards} />
-      <BoxCardFooter columnId={column?._id} />
+      <BoxCardFooter columnId={columnId} />
     </Box>
   );
 }

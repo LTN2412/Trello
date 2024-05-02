@@ -1,17 +1,18 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchBoard } from "@/features/board/boardSlice";
 import BoardBar from "./BoardBar/BoardBar";
 import BoardContent from "./BoardContent/BoardContent";
-import { useEffect, useState } from "react";
-import { fetchBoardAPI } from "../../apis";
+
 export default function Board() {
-  const [board, setBoard] = useState();
+  const dispatch = useDispatch();
   useEffect(() => {
-    const boardId = "66297216a502c904db80d942";
-    fetchBoardAPI(boardId).then((board) => setBoard(board));
-  }, []);
+    dispatch(fetchBoard("6631800b573543b0c8e6b24e"));
+  }, [dispatch]);
   return (
     <>
-      <BoardBar board={board} />
-      <BoardContent board={board} />
+      <BoardBar />
+      <BoardContent />
     </>
   );
 }

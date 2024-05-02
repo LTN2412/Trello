@@ -5,8 +5,8 @@ import Tooltip from "@mui/material/Tooltip";
 export default function Notifications() {
   return (
     <Tooltip title="Notifications">
-      <Badge color="secondary" variant="dot" sx={{ cursor: "pointer" }}>
-        <NotificationsNoneIcon color="action" />
+      <Badge color="secondary" variant="standard" sx={{ cursor: "pointer" }}>
+        <NotificationsNoneIcon color="red" />
       </Badge>
     </Tooltip>
   );

@@ -1,9 +1,9 @@
-import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react";
 
 export default function BoxCardHeader({ columnTitle }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -23,9 +23,18 @@ export default function BoxCardHeader({ columnTitle }) {
         alignItems: "center",
         justifyContent: "space-between",
         textAlign: "center",
+        px: 1,
       }}
     >
-      <Typography fontWeight={"bold"}>{columnTitle}</Typography>
+      <Typography
+        fontWeight={"bold"}
+        fontSize={15}
+        sx={{
+          color: "text.main",
+        }}
+      >
+        {columnTitle}
+      </Typography>
       <>
         <ExpandMoreIcon
           id="basic-button"
@@ -33,7 +42,7 @@ export default function BoxCardHeader({ columnTitle }) {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          sx={{ color: "text.primary", cursor: "pointer" }}
+          sx={{ color: "text.main", cursor: "pointer" }}
         />
         <Menu
           id="basic-menu"

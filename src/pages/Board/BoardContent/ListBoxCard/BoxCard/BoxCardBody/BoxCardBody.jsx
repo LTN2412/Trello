@@ -1,18 +1,15 @@
 import Box from "@mui/material/Box";
 import CardTrello from "./Card/Card";
 
-const CARD_HEADER_HEIGHT = "60px";
-const CARD_FOOTER_HEIGHT = "60px";
 export default function BoxCardBody({ cards }) {
   return (
     <Box
       sx={{
         width: "100%",
-        height: (theme) => theme.trelloCustom.card.cardContentHeight,
         maxHeight: (theme) =>
-          `calc( ${
-            theme.trelloCustom.boardContentHeight
-          } - ${CARD_HEADER_HEIGHT} - ${CARD_FOOTER_HEIGHT} - ${theme.spacing(
+          `calc( ${theme.trelloCustom.boardContentHeight} - ${
+            theme.trelloCustom.card.cardHeaderHeight
+          } - ${theme.trelloCustom.card.cardFooterHeight} - ${theme.spacing(
             5
           )} )`,
         overflowX: "hidden",
@@ -25,7 +22,7 @@ export default function BoxCardBody({ cards }) {
       }}
     >
       {cards?.map((card) => (
-        <CardTrello key={card._id} card={card} />
+        <CardTrello key={card.id} card={card} />
       ))}
     </Box>
   );

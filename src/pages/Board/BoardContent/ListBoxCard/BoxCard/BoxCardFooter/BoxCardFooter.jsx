@@ -7,9 +7,12 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
-import { CreateNewCardAPI } from "@/apis/index";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewCard, selectColumnById } from "@/features/board/boardSlice";
 
 export default function CardFooter({ columnId }) {
+  const column = useSelector((state) => selectColumnById(state, columnId));
+  const dispatch = useDispatch();
   const [openNewCardInput, setopenNewCardInput] = useState(false);
   const toggleOpenNewCardInput = () => setopenNewCardInput(!openNewCardInput);
   const [cardTitle, SetCardTitle] = useState("");
@@ -22,6 +25,7 @@ export default function CardFooter({ columnId }) {
         alignItems: "center",
         textAlign: "center",
         justifyContent: "space-between",
+        px: 1,
       }}
     >
       {!openNewCardInput ? (
@@ -33,17 +37,20 @@ export default function CardFooter({ columnId }) {
             alignItems: "center",
           }}
         >
-          <Button
-            onClick={toggleOpenNewCardInput}
-            sx={{ color: "primary.main " }}
-          >
-            <AddCardIcon />
-            <Typography pl={1}>Add new card</Typography>
+          <Button onClick={toggleOpenNewCardInput} sx={{ color: "text.main " }}>
+            <AddCardIcon sx={{ color: "text.main" }} />
+            <Typography pl={1} color={"text.main"}>
+              Add new card
+            </Typography>
           </Button>
-          <MenuIcon sx={{ color: "text.primary", cursor: "pointer" }} />
+          <MenuIcon sx={{ color: "text.main", cursor: "pointer" }} />
         </Box>
       ) : (
         <Box
+          // onBlur={() => {
+          //   setopenNewCardInput(false);
+          //   SetCardTitle("");
+          // }}
           sx={{
             width: "100%",
             display: "flex",
@@ -60,10 +67,6 @@ export default function CardFooter({ columnId }) {
             size="small"
             variant="outlined"
             autoFocus
-            // onBlur={() => {
-            //   setopenNewCardInput(false);
-            //   SetCardTitle("");
-            // }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -80,6 +83,7 @@ export default function CardFooter({ columnId }) {
             value={cardTitle}
             onChange={(e) => SetCardTitle(e.target.value)}
             sx={{
+              width: "200px",
               height: "fit-content",
               "& label": { color: "white" },
               "& input": { color: "white" },
@@ -92,14 +96,19 @@ export default function CardFooter({ columnId }) {
             }}
           />
           <Button
-            onClick={async () => {
-              await CreateNewCardAPI({ columnId: columnId, title: cardTitle });
+            onClick={() => {
+              dispatch(
+                createNewCard({ columnId: column.id, title: cardTitle })
+              );
+              setopenNewCardInput(false);
+              SetCardTitle("");
             }}
             sx={{
               height: "40px",
-              backgroundColor: "green",
+              color: "text.secondary",
+              border: "1px solid white",
               whiteSpace: "nowrap",
-              p: "15px",
+              p: "20px",
               "&:hover": {
                 backgroundColor: "primary.dark",
               },

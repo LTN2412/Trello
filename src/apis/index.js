@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_ROOT } from "../../utils/constants";
+import { API_ROOT } from "@/utils/constants";
 
 export const fetchBoardAPI = async (boardId) => {
   const response = await axios.get(`${API_ROOT}/board/${boardId}`);
@@ -14,4 +14,8 @@ export const CreateNewColumnAPI = async (columnData) => {
 export const CreateNewCardAPI = async (cardData) => {
   const response = await axios.post(`${API_ROOT}/card/create`, cardData);
   return response.data;
+};
+
+export const DndColumnAPI = async (dndData) => {
+  await axios.post(`${API_ROOT}/board/dnd`, dndData);
 };

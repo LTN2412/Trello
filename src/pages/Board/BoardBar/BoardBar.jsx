@@ -9,21 +9,22 @@ import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Tooltip from "@mui/material/Tooltip";
+import { useSelector } from "react-redux";
+import { selectBoard } from "@/features/board/boardSlice";
 
-export default function BoardBar({ board }) {
+export default function BoardBar() {
+  const board = useSelector(selectBoard);
   const handleClick = () => {};
   const chipCss = {
-    backgroundColor: "white",
+    backgroundColor: "primary.main",
     borderRadius: 2,
     padding: 0.5,
+    color: "text.main",
     "& .MuiSvgIcon-root": {
-      color: "#3498db",
+      color: "text.main",
     },
     "&:hover ": {
-      backgroundColor: "#3498db",
-      "& .MuiSvgIcon-root": {
-        color: "white",
-      },
+      opacity: "0.8",
     },
   };
   return (
@@ -32,7 +33,8 @@ export default function BoardBar({ board }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "white",
+        backgroundColor: "secondary.main",
+        px: 2,
       }}
     >
       <Box
@@ -44,14 +46,12 @@ export default function BoardBar({ board }) {
           gap: 2,
         }}
       >
-        <Tooltip title={board?.description}>
-          <Chip
-            icon={<DashboardIcon />}
-            label={board?.title}
-            onClick={handleClick}
-            sx={chipCss}
-          />
-        </Tooltip>
+        <Chip
+          icon={<DashboardIcon />}
+          label={board?.title}
+          onClick={handleClick}
+          sx={chipCss}
+        />
         <Chip
           icon={<VpnLockIcon />}
           label={board?.description}
@@ -60,7 +60,7 @@ export default function BoardBar({ board }) {
         />
         <Chip
           icon={<AddToDriveIcon />}
-          label="hi"
+          label="Google Drive"
           onClick={handleClick}
           sx={chipCss}
         />
@@ -70,6 +70,12 @@ export default function BoardBar({ board }) {
           variant="outlined"
           sx={{
             gap: 1,
+            backgroundColor: "primary.main",
+            color: "text.main",
+            "&:hover": {
+              backgroundColor: "primary.main",
+              opacity: "0.5",
+            },
           }}
         >
           <PersonAddAltIcon />

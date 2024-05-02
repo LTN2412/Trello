@@ -1,32 +1,52 @@
 import Button from "@mui/material/Button";
-import BoxCard from "./BoxCard/BoxCard";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { CreateNewColumnAPI } from "@/apis/index";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewColumn, selectBoardId } from "@/features/board/boardSlice";
+import {
+  SortableContext,
+  horizontalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import BoxCard from "./BoxCard/BoxCard";
 
-export default function ListBoxCard({ columns, boardId }) {
+export default function ListBoxCard({ columns }) {
+  const dispatch = useDispatch();
+  const boardId = useSelector(selectBoardId);
   const [openNewColumnInput, setopenNewColumnInput] = useState(false);
   const toggleOpenNewColumnInput = () =>
     setopenNewColumnInput(!openNewColumnInput);
   const [columnTitle, SetColumnTitle] = useState("");
   return (
     <>
-      {columns?.map((column) => {
-        return <BoxCard key={column._id} column={column} />;
-      })}
+      {columns && (
+        <SortableContext
+          items={columns}
+          strategy={horizontalListSortingStrategy}
+        >
+          {columns?.map((column) => {
+            return <BoxCard key={column.id} columnId={column.id} />;
+          })}
+        </SortableContext>
+      )}
       {!openNewColumnInput ? (
         <Button
           startIcon={<AddCardIcon />}
           variant="contained"
           sx={{
+            minWidth: "200px",
             height: "fit-content",
-            color: "red",
-            backgroundColor: "green",
+            color: "text.main",
+            backgroundColor: "primary.main",
             p: 1.5,
+            mr: 1,
+            whiteSpace: "nowrap",
+            "&:hover": {
+              opacity: "0.8",
+            },
           }}
           onClick={toggleOpenNewColumnInput}
         >
@@ -38,7 +58,7 @@ export default function ListBoxCard({ columns, boardId }) {
             label="Title"
             type="text"
             size="small"
-            variant="outlined"
+            variant="filled"
             autoFocus
             InputProps={{
               endAdornment: (
@@ -53,7 +73,10 @@ export default function ListBoxCard({ columns, boardId }) {
             value={columnTitle}
             onChange={(e) => SetColumnTitle(e.target.value)}
             sx={{
+              minWidth: "200px",
               height: "fit-content",
+              backgroundColor: "primary.main",
+              mr: 1,
               "& label": { color: "white" },
               "& input": { color: "white" },
               "& label.Mui-focused": { color: "white" },
@@ -66,14 +89,21 @@ export default function ListBoxCard({ columns, boardId }) {
           />
           <Button
             sx={{
-              backgroundColor: "green",
+              backgroundColor: "primary.main",
+              color: "text.secondary",
+              mt: 1,
+              mr: 1,
               "&:hover": {
                 backgroundColor: "primary.dark",
               },
             }}
-            onClick={async () =>
-              await CreateNewColumnAPI({ boardId: boardId, title: columnTitle })
-            }
+            onClick={() => {
+              dispatch(
+                createNewColumn({ boardId: boardId, title: columnTitle })
+              );
+              setopenNewColumnInput(false);
+              SetColumnTitle("");
+            }}
           >
             Add Column
           </Button>
