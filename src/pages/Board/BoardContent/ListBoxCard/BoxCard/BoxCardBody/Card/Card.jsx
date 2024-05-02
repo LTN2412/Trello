@@ -7,14 +7,33 @@ import Button from "@mui/material/Button";
 import GroupIcon from "@mui/icons-material/Group";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import AttachmentIcon from "@mui/icons-material/Attachment";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 export default function CardTrello({ card }) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: card.id, data: card });
+  const dndKitCardStyle = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : null,
+  };
   const shouldShowCardActions = () =>
     !!card?.memberIds?.length ||
     !!card?.comments?.length ||
     !!card?.attachments?.length;
   return (
     <Card
+      ref={setNodeRef}
+      style={dndKitCardStyle}
+      {...attributes}
+      {...listeners}
       sx={{
         overflow: "unset",
         backgroundColor: "secondary.main",

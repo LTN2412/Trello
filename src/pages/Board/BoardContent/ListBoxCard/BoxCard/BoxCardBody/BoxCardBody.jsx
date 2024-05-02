@@ -1,4 +1,8 @@
 import Box from "@mui/material/Box";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import CardTrello from "./Card/Card";
 
 export default function BoxCardBody({ cards }) {
@@ -21,9 +25,11 @@ export default function BoxCardBody({ cards }) {
         gap: 1,
       }}
     >
-      {cards?.map((card) => (
-        <CardTrello key={card.id} card={card} />
-      ))}
+      <SortableContext items={cards} strategy={verticalListSortingStrategy}>
+        {cards?.map((card) => (
+          <CardTrello key={card.id} card={card} />
+        ))}
+      </SortableContext>
     </Box>
   );
 }

@@ -9,12 +9,21 @@ import BoxCardBody from "./BoxCardBody/BoxCardBody";
 
 export default function BoxCard({ columnId }) {
   const column = useSelector((state) => selectColumnById(state, columnId));
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: columnId });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: columnId, data: column });
+
   const dndKitColumnStyle = {
     transform: CSS.Translate.toString(transform),
     transition,
+    opacity: isDragging ? 0.5 : null,
   };
+
   return (
     <Box
       ref={setNodeRef}
