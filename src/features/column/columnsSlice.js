@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { CreateNewColumnAPI } from "@/apis";
+import { CreateNewColumnAPI, DndCardAPI } from "@/apis";
 import { addColumnIds } from "@/features/board/boardSlice";
 import orderedArray from "@/utils/orderedArray";
 
@@ -15,6 +15,19 @@ export const createNewColumn = createAsyncThunk(
     const data = await CreateNewColumnAPI(columnData);
     dispatch(addColumnIds({ id: data.id, boardId: data.boardId }));
     return data;
+  }
+);
+
+export const dndCardAsync = createAsyncThunk(
+  "column/dnd",
+  async (cardData, { dispatch }) => {
+    dispatch(
+      dndCard({
+        columnId: cardData.columnId,
+        cardOrderIds: cardData.cardOrderIds,
+      })
+    );
+    await DndCardAPI(cardData);
   }
 );
 
@@ -41,6 +54,23 @@ export const columnSlice = createSlice({
     refreshColumn(state, { payload }) {
       state.ids = payload;
     },
+    updateOrderColumn(state, { payload }) {
+      columnsApdapter.updateOne(state, {
+        id: payload.columnId,
+        changes: {
+          cardOrderIds: payload.cardOrderIds,
+        },
+      });
+    },
+    dndCard(state, { payload }) {
+      const { columnId, cardOrderIds } = payload;
+      columnsApdapter.updateOne(state, {
+        id: columnId,
+        changes: {
+          cardOrderIds: cardOrderIds,
+        },
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createNewColumn.fulfilled, (state, action) => {
@@ -49,7 +79,13 @@ export const columnSlice = createSlice({
   },
 });
 
-export const { setAllColumns, addCardIds, refreshColumn } = columnSlice.actions;
+export const {
+  setAllColumns,
+  addCardIds,
+  refreshColumn,
+  updateOrderColumn,
+  dndCard,
+} = columnSlice.actions;
 
 export const columnsSelector = columnsApdapter.getSelectors(
   (state) => state.column

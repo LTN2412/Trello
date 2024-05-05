@@ -6,11 +6,20 @@ import {
 import CardTrello from "./Card/Card";
 import { useSelector } from "react-redux";
 import { selectAllCardByColumnId } from "@/features/card/cardsSlice";
+import { columnsSelector } from "@/features/column/columnsSlice";
+import orderedArray from "@/utils/orderedArray";
 
 export default function BoxCardBody({ columnId }) {
   const cards = useSelector((state) =>
     selectAllCardByColumnId(state, columnId)
   );
+
+  const cardOrderIds = useSelector((state) =>
+    columnsSelector.selectById(state, columnId)
+  )?.cardOrderIds;
+
+  const cardsOrder = orderedArray(cards, cardOrderIds, "id");
+
   return (
     <Box
       sx={{
@@ -30,8 +39,11 @@ export default function BoxCardBody({ columnId }) {
         gap: 1,
       }}
     >
-      <SortableContext items={cards} strategy={verticalListSortingStrategy}>
-        {cards?.map((card) => (
+      <SortableContext
+        items={cardsOrder}
+        strategy={verticalListSortingStrategy}
+      >
+        {cardsOrder?.map((card) => (
           <CardTrello key={card.id} card={card} />
         ))}
       </SortableContext>

@@ -56,6 +56,7 @@ export const boardSlice = createSlice({
           columnOrderIds: columnOrderIds,
         },
       });
+
       // return (state.entities[boardId].columnOrderIds = columnOrderIds);
     },
     // newActiveCard(state, action) {

@@ -20,10 +20,18 @@ export const createNewCard = createAsyncThunk(
 
 export const cardsSlice = createSlice({
   name: "card",
-  initialState: cardsAdapter.getInitialState(),
+  initialState: cardsAdapter.getInitialState({ test: false }),
   reducers: {
     setAllCards(state, action) {
       cardsAdapter.setAll(state, action.payload);
+    },
+    updateCard(state, { payload }) {
+      cardsAdapter.updateOne(state, {
+        id: payload.id,
+        changes: {
+          columnId: payload.columnId,
+        },
+      });
     },
   },
   extraReducers: (builder) => {
@@ -33,7 +41,7 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { setAllCards } = cardsSlice.actions;
+export const { setAllCards, updateCard } = cardsSlice.actions;
 
 export const cardsSelector = cardsAdapter.getSelectors((state) => state.card);
 
