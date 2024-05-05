@@ -8,10 +8,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewCard, selectColumnById } from "@/features/board/boardSlice";
+import { createNewCard } from "@/features/card/cardsSlice";
 
 export default function CardFooter({ columnId }) {
-  const column = useSelector((state) => selectColumnById(state, columnId));
+  // const column = useSelector((state) => selectColumnById(state, columnId));
   const dispatch = useDispatch();
   const [openNewCardInput, setopenNewCardInput] = useState(false);
   const toggleOpenNewCardInput = () => setopenNewCardInput(!openNewCardInput);
@@ -97,9 +97,7 @@ export default function CardFooter({ columnId }) {
           />
           <Button
             onClick={() => {
-              dispatch(
-                createNewCard({ columnId: column.id, title: cardTitle })
-              );
+              dispatch(createNewCard({ columnId: columnId, title: cardTitle }));
               setopenNewCardInput(false);
               SetCardTitle("");
             }}

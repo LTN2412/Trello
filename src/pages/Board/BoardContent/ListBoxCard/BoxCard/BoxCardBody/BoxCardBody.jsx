@@ -4,8 +4,13 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import CardTrello from "./Card/Card";
+import { useSelector } from "react-redux";
+import { selectAllCardByColumnId } from "@/features/card/cardsSlice";
 
-export default function BoxCardBody({ cards }) {
+export default function BoxCardBody({ columnId }) {
+  const cards = useSelector((state) =>
+    selectAllCardByColumnId(state, columnId)
+  );
   return (
     <Box
       sx={{

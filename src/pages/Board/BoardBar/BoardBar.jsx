@@ -10,10 +10,10 @@ import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import Tooltip from "@mui/material/Tooltip";
 import { useSelector } from "react-redux";
-import { selectBoard } from "@/features/board/boardSlice";
+import { boardsSelector } from "@/features/board/boardSlice";
 
 export default function BoardBar() {
-  const board = useSelector(selectBoard);
+  const board = useSelector((state) => boardsSelector.selectAll(state)[0]);
   const handleClick = () => {};
   const chipCss = {
     backgroundColor: "primary.main",

@@ -6,16 +6,19 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewColumn, selectBoardId } from "@/features/board/boardSlice";
 import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import BoxCard from "./BoxCard/BoxCard";
+import { columnsSelector } from "@/features/column/columnsSlice";
+import { createNewColumn } from "@/features/column/columnsSlice";
 
-export default function ListBoxCard({ columns }) {
+export default function ListBoxCard() {
   const dispatch = useDispatch();
-  const boardId = useSelector(selectBoardId);
+  const boardId = useSelector((state) => state.board.ids[0]);
+  const columns = useSelector((state) => columnsSelector.selectAll(state));
+  const columnsIds = useSelector((state) => state.column.ids);
   const [openNewColumnInput, setopenNewColumnInput] = useState(false);
   const toggleOpenNewColumnInput = () =>
     setopenNewColumnInput(!openNewColumnInput);
@@ -24,7 +27,7 @@ export default function ListBoxCard({ columns }) {
     <>
       {columns && (
         <SortableContext
-          items={columns}
+          items={columnsIds}
           strategy={horizontalListSortingStrategy}
         >
           {columns?.map((column) => {
