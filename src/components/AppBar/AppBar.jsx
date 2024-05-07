@@ -6,12 +6,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import ModeSelect from "./ModeSelect/ModeSelect";
 import Trello from "./Trello/Trello";
-import WorkSpace from "./Menus/Workspaces";
-import Recent from "./Menus/Recent";
-import Starred from "./Menus/Starred";
-import Templates from "./Menus/Templates";
+import WorkSpace from "./Menu/Workspaces";
+import Recent from "./Menu/Recent";
+import Starred from "./Menu/Starred";
+import Templates from "./Menu/Templates";
 import Notifications from "./Notifications/Notification";
-import Profile from "./Menus/Profile";
+import Profile from "./Menu/Profile";
 
 export default function AppBar() {
   return (

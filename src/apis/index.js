@@ -23,3 +23,7 @@ export const DndColumnAPI = async (dndData) => {
 export const DndCardAPI = async (dndData) => {
   await axios.post(`${API_ROOT}/column/dnd`, dndData);
 };
+
+export const UpdateCardAPI = async (cardData) => {
+  await axios.post(`${API_ROOT}/card/update`, cardData);
+};

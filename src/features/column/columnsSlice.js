@@ -3,9 +3,10 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { CreateNewColumnAPI, DndCardAPI } from "@/apis";
+import { CreateNewColumnAPI, DndCardAPI, UpdateCardAPI } from "@/apis";
 import { addColumnIds } from "@/features/board/boardSlice";
 import orderedArray from "@/utils/orderedArray";
+import { updateCard } from "../card/cardsSlice";
 
 const columnsApdapter = createEntityAdapter();
 
@@ -19,7 +20,7 @@ export const createNewColumn = createAsyncThunk(
 );
 
 export const dndCardAsync = createAsyncThunk(
-  "column/dnd",
+  "column/dndSameColumn",
   async (cardData, { dispatch }) => {
     dispatch(
       dndCard({
@@ -28,6 +29,42 @@ export const dndCardAsync = createAsyncThunk(
       })
     );
     await DndCardAPI(cardData);
+  }
+);
+
+export const dndCardOther = createAsyncThunk(
+  "column/dndOtherColumn",
+  async (data, { dispatch }) => {
+    dispatch(
+      updateOrderColumn({
+        columnId: data.activeColumnId,
+        cardOrderIds: data.nextActiveColumn,
+      })
+    );
+    dispatch(
+      updateOrderColumn({
+        columnId: data.overColumnId,
+        cardOrderIds: data.nextOverColumn,
+      })
+    );
+    dispatch(
+      updateCard({
+        id: data.activeCardId,
+        columnId: data.overColumnId,
+      })
+    );
+    await DndCardAPI({
+      columnId: data.activeColumnId,
+      cardOrderIds: data.nextActiveColumn,
+    });
+    await DndCardAPI({
+      columnId: data.overColumnId,
+      cardOrderIds: data.nextOverColumn,
+    });
+    await UpdateCardAPI({
+      id: data.activeCardId,
+      columnId: data.overColumnId,
+    });
   }
 );
 

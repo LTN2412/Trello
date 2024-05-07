@@ -7,7 +7,7 @@ import BoardContent from "./BoardContent/BoardContent";
 export default function Board() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchBoard("6631800b573543b0c8e6b24e"));
+    dispatch(fetchBoard("6638e741f7d1588dd6e53ced"));
   }, [dispatch]);
   return (
     <>
