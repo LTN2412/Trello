@@ -1,7 +1,28 @@
 import axios from "axios";
 import { API_ROOT } from "@/utils/constants";
 
-export const fetchBoardAPI = async (boardId) => {
+axios.defaults.withCredentials = true;
+
+export const AuthenticateAPI = async (data) => {
+  const formData = new FormData();
+  for (const [key, value] of Object.entries(data)) {
+    formData.append(key, value);
+  }
+  try {
+    await axios.post(`${API_ROOT}/user/token`, formData);
+    const response = await axios.post(`${API_ROOT}/user/boardId`);
+    return response.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+};
+
+export const FetchUserIdAPI = async () => {
+  const response = await axios.post(`${API_ROOT}/user/boardId`);
+  return response.data;
+};
+
+export const FetchBoardAPI = async (boardId) => {
   const response = await axios.get(`${API_ROOT}/board/${boardId}`);
   return response.data;
 };

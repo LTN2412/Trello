@@ -6,12 +6,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import ModeSelect from "./ModeSelect/ModeSelect";
 import Trello from "./Trello/Trello";
-import WorkSpace from "./Menu/Workspaces";
-import Recent from "./Menu/Recent";
-import Starred from "./Menu/Starred";
-import Templates from "./Menu/Templates";
+import MenuApp from "./Menu/Menu";
 import Notifications from "./Notifications/Notification";
-import Profile from "./Menu/Profile";
 
 export default function AppBar() {
   return (
@@ -29,17 +25,16 @@ export default function AppBar() {
       <Box sx={{ display: "flex", alignItems: "center", gap: 2, pl: 2 }}>
         <Trello />
         <Box sx={{ display: "flex" }}>
-          <WorkSpace />
-          <Recent />
-          <Starred />
-          <Templates />
+          <MenuApp title={"WorkSpace"} />
+          <MenuApp title={"Recent"} />
+          <MenuApp title={"Starred"} />
+          <MenuApp title={"Templates "} />
         </Box>
         <Button
           variant="text"
           startIcon={<LibraryAddIcon />}
           sx={{
             color: "text.primary",
-            "&:hover": {},
           }}
         >
           Create
@@ -69,7 +64,7 @@ export default function AppBar() {
         />
         <ModeSelect />
         <Notifications />
-        <Profile />
+        <MenuApp title={"Profile"} />
       </Box>
     </Box>
   );

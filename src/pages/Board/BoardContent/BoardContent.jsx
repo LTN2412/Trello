@@ -24,7 +24,7 @@ import {
 import { useState } from "react";
 
 export default function BoardContent() {
-  const imgPath = "src/assets/vangogh.jpg";
+  const imgPath = "/vangogh.jpg";
 
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: { distance: 10 },

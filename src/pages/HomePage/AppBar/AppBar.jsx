@@ -5,8 +5,10 @@ import Menu from "@/components/AppBar/Menu/Menu";
 import Button from "@mui/material/Button";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import { useNavigate } from "react-router-dom";
 
 export default function AppBarHomePage() {
+  const navigate = useNavigate();
   const { mode, setMode } = useColorScheme();
   const toggleChangeMode = () => {
     mode == "light" ? setMode("dark") : setMode("light");
@@ -28,15 +30,26 @@ export default function AppBarHomePage() {
         <Menu title={"Features"} />
         <Menu title={"Solutions"} />
         <Menu title={"Plans"} />
-        <Button sx={{ color: "white" }}>Pricing</Button>
+        <Button sx={{ color: "text.primary" }}>Pricing</Button>
         <Menu title={"Resources"} />
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 2, pr: 2 }}>
-        <Button onClick={toggleChangeMode} sx={{ color: "red" }}>
+        <Button
+          onClick={toggleChangeMode}
+          sx={{
+            color: (theme) =>
+              theme.palette.mode == "light" ? "#f1c40f" : "#7f8c8d",
+          }}
+        >
           {mode == "light" ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
         </Button>
-        <Button sx={{ color: "white" }}>Login</Button>
-        <Button sx={{ color: "white" }}>Get Trello for free</Button>
+        <Button
+          sx={{ color: "text.primary" }}
+          onClick={() => navigate("/auth/signin")}
+        >
+          Login
+        </Button>
+        <Button sx={{ color: "text.primary" }}>Get Trello for free</Button>
       </Box>
     </Box>
   );

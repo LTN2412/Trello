@@ -27,13 +27,18 @@ export default function TextBlock() {
             },
           }}
         ></TextField>
-        <Button variant="contained" sx={{ flex: 1 }}>
+        <Button variant="contained" sx={{ flex: 1, color: "text.primary" }}>
           Sign up now!
         </Button>
       </Box>
       <Typography>
         {"Already have account? "}
-        <Link to={"/board"}>Sign in</Link>
+        <Link
+          to={"/auth/signin"}
+          style={{ textDecoration: "none", fontWeight: "bold", color: "black" }}
+        >
+          Sign in
+        </Link>
         {" now!"}
       </Typography>
     </Box>

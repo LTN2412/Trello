@@ -42,7 +42,7 @@ export default function ListBoxCard() {
           sx={{
             minWidth: "200px",
             height: "fit-content",
-            color: "text.main",
+            color: "text.primary",
             backgroundColor: "primary.main",
             p: 1.5,
             mr: 1,

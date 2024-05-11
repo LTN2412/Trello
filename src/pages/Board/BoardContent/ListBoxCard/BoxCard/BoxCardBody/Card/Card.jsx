@@ -36,13 +36,13 @@ export default function CardTrello({ card }) {
       {...listeners}
       sx={{
         overflow: "unset",
-        backgroundColor: "secondary.main",
+        backgroundColor: "primary.light",
         borderRadius: "12px",
       }}
     >
       {card?.cover && <CardMedia component="img" src={card.cover} />}
       <CardContent>
-        <Typography color={"text.main"}>{card?.title}</Typography>
+        <Typography color={"text.primary"}>{card?.title}</Typography>
       </CardContent>
       {shouldShowCardActions() && (
         <CardActions sx={{ pt: 0 }}>

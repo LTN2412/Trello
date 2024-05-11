@@ -3,8 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import GitHubICon from "@mui/icons-material/GitHub";
 import SvgIcon from "@mui/material/SvgIcon";
-// import GoogleIcon from "/google-svg.svg";
-// import { signInGithub, signInGoogle } from "@/actions/Authenticate";
+import GoogleIcon from "@/assets/google-svg.svg?react";
 
 export default function OAuthLogin() {
   return (
@@ -25,10 +24,14 @@ export default function OAuthLogin() {
             opacity: "0.7",
           },
         }}
-        // onClick={() => signInGithub()}
       >
-        <GitHubICon sx={{ fontSize: 25 }} />
-        <Typography sx={{ fontSize: 15, textTransform: "capitalize" }}>
+        <GitHubICon sx={{ fontSize: 25, color: "white" }} />
+        <Typography
+          sx={{
+            fontSize: 15,
+            color: "white",
+          }}
+        >
           Github
         </Typography>
       </Button>
@@ -47,9 +50,8 @@ export default function OAuthLogin() {
             opacity: 0.8,
           },
         }}
-        // onClick={() => signInGoogle()}
       >
-        {/* <SvgIcon component={GoogleIcon} inheritViewBox sx={{ fontSize: 25 }} /> */}
+        <SvgIcon component={GoogleIcon} inheritViewBox sx={{ fontSize: 25 }} />
         <Typography sx={{ fontSize: 15, textTransform: "capitalize" }}>
           Google
         </Typography>

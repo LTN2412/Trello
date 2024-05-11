@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
-import OAuthLogin from "@/components/OAuthLogin/OAuthLogin";
-import CredentialLogin from "@/components/CredentialLogin/CredentialLogin";
+import OAuthLogin from "./OAuthLogin/OAuthLogin";
+import CredentialLogin from "./CredentialLogin/CredentialLogin";
 import { Link } from "react-router-dom";
 
 export default function SignIn() {
@@ -13,7 +13,12 @@ export default function SignIn() {
       <CredentialLogin />
       <Typography sx={{ mt: 2 }}>
         {"Not a member? "}
-        <Link to={"/auth/signup"}>Sign up</Link>
+        <Link
+          to={"/auth/signup"}
+          style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}
+        >
+          Sign up
+        </Link>
         {" now"}
       </Typography>
     </>

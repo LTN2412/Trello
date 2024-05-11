@@ -26,7 +26,9 @@ const theme = extendTheme({
       palette: {
         primary: {
           main: "#3498db",
-          dark: "#2980b9",
+        },
+        secondary: {
+          main: "#3498db",
         },
       },
     },
@@ -34,12 +36,13 @@ const theme = extendTheme({
       palette: {
         primary: {
           main: "#101204",
+          light: "#2c3e50",
         },
         secondary: {
-          main: "#23272B",
+          main: "#ecf0f1",
         },
         text: {
-          main: "#9fadbc",
+          primary: "#9fadbc",
           secondary: "white",
         },
         typography: {
@@ -98,21 +101,20 @@ const theme = extendTheme({
   //       }),
   //     },
   //   },
-  //   MuiOutlinedInput: {
-  //     styleOverrides: {
-  //       root: ({ theme }) => {
-  //         return {
-  //           color: theme.palette.primary.main,
+  // MuiOutlinedInput: {
+  //   styleOverrides: {
+  //     root: ({ theme }) => {
+  //       return {
+  //         color: theme.palette.primary.main,
+  //         ".MuiOutlinedInput-notchedOutline": {
+  //           borderColor: theme.palette.primary.main,
+  //         },
+  //         "&:hover": {
   //           ".MuiOutlinedInput-notchedOutline": {
-  //             borderColor: theme.palette.primary.light,
+  //             borderColor: theme.palette.primary.main,
   //           },
-  //           "&:hover": {
-  //             ".MuiOutlinedInput-notchedOutline": {
-  //               borderColor: theme.palette.primary.main,
-  //             },
-  //           },
-  //         };
-  //       },
+  //         },
+  //       };
   //     },
   //   },
   // },

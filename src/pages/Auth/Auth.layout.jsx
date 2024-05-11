@@ -18,7 +18,8 @@ export default function Auth() {
         sx={{
           width: "70vw",
           height: "80vh",
-          backgroundColor: "white",
+          backgroundColor: (theme) =>
+            theme.palette.mode == "light" ? "white" : "#2c3e50",
           borderRadius: 3,
           display: "flex",
           flexDirection: "column",

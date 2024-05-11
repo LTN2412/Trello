@@ -37,13 +37,16 @@ export default function CardFooter({ columnId }) {
             alignItems: "center",
           }}
         >
-          <Button onClick={toggleOpenNewCardInput} sx={{ color: "text.main " }}>
-            <AddCardIcon sx={{ color: "text.main" }} />
-            <Typography pl={1} color={"text.main"}>
+          <Button
+            onClick={toggleOpenNewCardInput}
+            sx={{ color: "text.primary " }}
+          >
+            <AddCardIcon sx={{ color: "text.primary" }} />
+            <Typography pl={1} color={"text.primary"}>
               Add new card
             </Typography>
           </Button>
-          <MenuIcon sx={{ color: "text.main", cursor: "pointer" }} />
+          <MenuIcon sx={{ color: "text.primary", cursor: "pointer" }} />
         </Box>
       ) : (
         <Box

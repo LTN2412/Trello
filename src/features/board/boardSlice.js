@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { fetchBoardAPI, DndColumnAPI } from "@/apis";
+import { FetchBoardAPI, DndColumnAPI } from "@/apis";
 import { refreshColumn, setAllColumns } from "@/features/column/columnsSlice";
 import { setAllCards } from "@/features/card/cardsSlice";
 
@@ -12,7 +12,7 @@ const boardsAdapter = createEntityAdapter((board) => board.id);
 export const fetchBoard = createAsyncThunk(
   "board/fetchBoard",
   async (boardId, { dispatch }) => {
-    const data = await fetchBoardAPI(boardId);
+    const data = await FetchBoardAPI(boardId);
     dispatch(
       setAllColumns({
         columns: data.columns,

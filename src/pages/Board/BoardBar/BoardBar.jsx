@@ -19,9 +19,9 @@ export default function BoardBar() {
     backgroundColor: "primary.main",
     borderRadius: 2,
     padding: 0.5,
-    color: "text.main",
+    color: "text.primary",
     "& .MuiSvgIcon-root": {
-      color: "text.main",
+      color: "text.primary",
     },
     "&:hover ": {
       opacity: "0.8",
@@ -33,7 +33,7 @@ export default function BoardBar() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "secondary.main",
+        backgroundColor: "primary.light",
         px: 2,
       }}
     >
@@ -71,7 +71,7 @@ export default function BoardBar() {
           sx={{
             gap: 1,
             backgroundColor: "primary.main",
-            color: "text.main",
+            color: "text.primary",
             "&:hover": {
               backgroundColor: "primary.main",
               opacity: "0.5",

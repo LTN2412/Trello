@@ -30,7 +30,7 @@ export default function BoxCardHeader({ columnTitle }) {
         fontWeight={"bold"}
         fontSize={15}
         sx={{
-          color: "text.main",
+          color: "text.primary",
         }}
       >
         {columnTitle}
@@ -42,7 +42,7 @@ export default function BoxCardHeader({ columnTitle }) {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          sx={{ color: "text.main", cursor: "pointer" }}
+          sx={{ color: "text.primary", cursor: "pointer" }}
         />
         <Menu
           id="basic-menu"
