@@ -1,12 +1,12 @@
-import { FetchUserIdAPI } from "@/apis";
+import { FetchUserAPI } from "@/apis";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchBoard } from "../board/boardSlice";
 
-export const fetchBoardId = createAsyncThunk(
-  "user/fetchBoardId",
+export const fetchUser = createAsyncThunk(
+  "user/fetchUser",
   async (_, { dispatch }) => {
-    const data = await FetchUserIdAPI();
-    dispatch(fetchBoard(data[0].id));
+    const data = await FetchUserAPI();
+    dispatch(fetchBoard(data.boardIds[0]));
     return data;
   }
 );
@@ -14,18 +14,20 @@ export const fetchBoardId = createAsyncThunk(
 export const usersSlice = createSlice({
   name: "user",
   initialState: {
-    id: "",
+    isLoggedIn: false,
+    user: {},
   },
   reducers: {
-    setId(state, { payload }) {
-      const { id } = payload;
-      state.id = id;
+    userLogout: (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchBoardId.fulfilled, (state, action) => {
-      state.id = action.payload.id;
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
     });
   },
 });
-export const { setId } = usersSlice.actions;
+export const { userLogout } = usersSlice.actions;

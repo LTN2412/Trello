@@ -5,15 +5,22 @@ import Typography from "@mui/material/Typography";
 import { useForm } from "react-hook-form";
 import { SignInSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { AuthenticateAPI } from "@/apis";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setId } from "@/features/user/usersSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "@/features/user/usersSlice";
+import storage from "redux-persist/lib/storage";
 
 export default function CredentialLogin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/board");
+  }, [isLoggedIn]);
+
   const [isPending, startTransition] = useTransition();
   const {
     register,
@@ -32,10 +39,11 @@ export default function CredentialLogin() {
   const onSubmit = (data) => {
     startTransition(async () => {
       try {
+        await storage.removeItem("persist:root");
         await AuthenticateAPI(data);
+        dispatch(fetchUser());
         navigate("/board");
       } catch (err) {
-        console.log(err.err);
         setError("root", {
           message: err?.err,
         });

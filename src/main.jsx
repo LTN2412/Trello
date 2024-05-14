@@ -4,9 +4,10 @@ import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/s
 import { CssBaseline } from "@mui/material";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 
 import theme from "./theme";
-import store from "./store";
+import { persistor, store } from "./store";
 import router from "./router/index";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <CssVarsProvider theme={theme}>
       <CssBaseline>
         <Provider store={store}>
-          <RouterProvider router={router} />
+          <PersistGate persistor={persistor}>
+            <RouterProvider router={router} />
+          </PersistGate>
         </Provider>
       </CssBaseline>
     </CssVarsProvider>

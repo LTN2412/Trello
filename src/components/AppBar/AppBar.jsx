@@ -8,8 +8,13 @@ import ModeSelect from "./ModeSelect/ModeSelect";
 import Trello from "./Trello/Trello";
 import MenuApp from "./Menu/Menu";
 import Notifications from "./Notifications/Notification";
+import { useDispatch } from "react-redux";
+import { userLogout } from "@/features/user/usersSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function AppBar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -64,7 +69,15 @@ export default function AppBar() {
         />
         <ModeSelect />
         <Notifications />
-        <MenuApp title={"Profile"} />
+        <Button
+          onClick={() => {
+            dispatch(userLogout());
+            navigate("/auth/signin");
+          }}
+          sx={{ color: "text.primary" }}
+        >
+          LoggOut
+        </Button>
       </Box>
     </Box>
   );

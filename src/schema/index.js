@@ -18,8 +18,8 @@ export const SignUpSchema = z.object({
   password: z.string().min(1, {
     message: "Password is required",
   }),
-  email: z.string().email(),
-  name: z.string().min(1, {
-    message: "Name is required",
+  verifyPassword: z.string().min(1, {
+    message: "Verify Password is required",
   }),
+  email: z.string().email("Not format email"),
 });
