@@ -12,15 +12,14 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(
-  persistConfig,
-  combineReducers({
-    user: usersSlice.reducer,
-    board: boardSlice.reducer,
-    column: columnSlice.reducer,
-    card: cardsSlice.reducer,
-  })
-);
+const rootReducer = combineReducers({
+  user: usersSlice.reducer,
+  board: boardSlice.reducer,
+  column: columnSlice.reducer,
+  card: cardsSlice.reducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
