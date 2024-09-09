@@ -1,0 +1,51 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum type {
+  public
+  private
+}
+
+model Board {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug           String
+  title          String
+  description    String?
+  type           type     @default(public)
+  ownerIds       String[] @db.ObjectId
+  memberIds      String[] @db.ObjectId
+  columnOrderIds String[] @db.ObjectId
+  columns        Column[]
+  createAt       DateTime @default(now()) @db.Timestamp
+  updateAt       DateTime @updatedAt @db.Timestamp
+  destroy        Boolean  @default(false) @map("_destroy")
+}
+
+model Column {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  boardId      String   @db.ObjectId
+  title        String
+  cardOrderIds String[] @db.ObjectId
+  cards        Card[]
+  createAt     DateTime @default(now()) @db.Timestamp
+  updateAt     DateTime @updatedAt @db.Timestamp
+  destroy      Boolean  @default(false) @map("_destroy")
+  Boards       Board?   @relation(fields: [boardId], references: [id], onDelete: Cascade)
+}
+
+model Card {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  columnId    String   @db.ObjectId
+  title       String
+  description String?
+  createAt    DateTime @default(now()) @db.Timestamp
+  updatedAt   DateTime @updatedAt @db.Timestamp
+  destroy     Boolean  @default(false) @map("_destroy")
+  Columns     Column?  @relation(fields: [columnId], references: [id], onDelete: Cascade)
+}
